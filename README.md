@@ -20,13 +20,13 @@ catkin config --init --mkdirs --extend /opt/ros/$ROS_DISTRO --merge-devel --cmak
 2. Clone the AutoTune repository:
 ```
 cd ~/autotune_ws/src
-git clone https://github.com/uzh-rpg/autotune.git
+git clone https://github.com/uzh-rpg/mh_autotune.git
 ```
 3. Clone the dependencies:
 ```
-vcs-import < autotune/dependencies.yaml
+vcs-import < mh_autotune/dependencies.yaml
 ```
-4. Download the Flightmare Unity Binary RPG_Flightmare.tar.xz for rendering from the [Releases](https://github.com/uzh-rpg/flightmare/releases) and extract it into ```~/autotune_ws/autotune/flightmare/flightrender```.
+4. Download the Flightmare Unity Binary RPG_Flightmare.tar.xz for rendering from the [Releases](https://github.com/uzh-rpg/flightmare/releases) and extract it into ```~/autotune_ws/src/mh_autotune/flightmare/flightrender```.
 
 5. Build:
 ```
@@ -35,7 +35,7 @@ catkin build
 6. Add sourcing of your catkin workspace and AUTOTUNE_PATH environment variable to your ```.bashrc``` file:
 ```
 echo "source ~/autotune_ws/devel/setup.bash" >> ~/.bashrc
-echo "export AUTOTUNE_PATH=~/autotune_ws/src/autotune" >> ~/.bashrc
+echo "export AUTOTUNE_PATH=~/autotune_ws/src/mh_autotune" >> ~/.bashrc
 source ~/.bashrc
 ```
 
@@ -60,7 +60,7 @@ We provide a set of time-optimal trajectories. However, you can add your own tra
 
 To use AutoTune to tune the model predictive controller and fly your own trajectory, you have to follow these steps:
 
-- Add your own trajectory to ```~/autotune_ws/src/autotune/resources/trajectories```
+- Add your own trajectory to ```~/autotune_ws/src/mh_autotune/resources/trajectories```
 
-- Change the ```file_name``` parameter in ```~/autotune_ws/src/autotune/params/autotune.yaml``` to match your trajectory file name
+- Change the ```file_name``` parameter in ```~/autotune_ws/src/mh_autotune/params/autotune.yaml``` to match your trajectory file name
 
