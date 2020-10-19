@@ -1,0 +1,10 @@
+# Available trajectory files: circle, drop, flip, spiral
+file_name: "drop.csv"
+max_iterations: 300
+sigma: 5
+z_offset: 4
+distance_threshold: 6.0
+horizon_length: 0.6
+slow_velocity: 1.0
+early_stop: 0
+save_trajectory: false

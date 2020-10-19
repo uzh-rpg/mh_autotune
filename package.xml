@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>autotune</name>
+  <version>0.0.1</version>
+  <description>AutoTune</description>
+
+  <maintainer email="alessandro.saviolo@hotmail.com">Alessandro Saviolo</maintainer>
+
+  <license>GNU GPL</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <buildtool_depend>catkin_simple</buildtool_depend>
+
+  <depend>flightlib</depend>
+  <depend>roscpp</depend>
+  <depend>rospy</depend>
+  <depend>tf</depend>
+  <depend>autopilot</depend>
+  <depend>quadrotor_common</depend>
+  <depend>nav_msgs</depend>
+  <depend>std_msgs</depend>
+  <depend>quadrotor_msgs</depend>
+</package>
