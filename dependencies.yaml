@@ -27,6 +27,10 @@ repositories:
     type: git
     url: git@github.com:uzh-rpg/rpg_quadrotor_control.git
     version: master
+  rpg_mpc:
+    type: git
+    url: git@github.com:uzh-rpg/rpg_mpc.git
+    version: master
   flightmare:
     type: git
     url: git@github.com:uzh-rpg/flightmare.git

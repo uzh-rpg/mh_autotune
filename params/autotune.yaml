@@ -1,5 +1,5 @@
 # Available trajectory files: circle, drop, flip, spiral
-file_name: "drop.csv"
+file_name: "circle.csv"
 max_iterations: 300
 sigma: 5
 z_offset: 4
