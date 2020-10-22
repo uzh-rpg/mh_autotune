@@ -26,7 +26,7 @@ repositories:
   rpg_quadrotor_control:
     type: git
     url: git@github.com:uzh-rpg/rpg_quadrotor_control.git
-    version: master
+    version: AutoTune
   rpg_mpc:
     type: git
     url: git@github.com:uzh-rpg/rpg_mpc.git
