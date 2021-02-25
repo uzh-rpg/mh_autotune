@@ -84,14 +84,14 @@ def findBestParams(resources_path, parameters_path):
   row = df.iloc[df["Error"].idxmin()]
   with open(parameters_path) as f:
       parameter_file = yaml.load(f)
-      parameter_file["Q_pos_x"] = row["Q_pos_x_0"]
-      parameter_file["Q_pos_y"] = row["Q_pos_y_0"]
-      parameter_file["Q_pos_z"] = row["Q_pos_z_0"]
-      parameter_file["Q_att_x"] = row["Q_att_x_0"]
-      parameter_file["Q_att_y"] = row["Q_att_y_0"]
-      parameter_file["Q_att_z"] = row["Q_att_z_0"]
-      parameter_file["Q_vel"]   = row["Q_vel_0"]
-      parameter_file["Q_omega"] = row["Q_omega_0"]
+      parameter_file["Q_pos_x"] = int(row["Q_pos_x_0"])
+      parameter_file["Q_pos_y"] = int(row["Q_pos_y_0"])
+      parameter_file["Q_pos_z"] = int(row["Q_pos_z_0"])
+      parameter_file["Q_att_x"] = int(row["Q_att_x_0"])
+      parameter_file["Q_att_y"] = int(row["Q_att_y_0"])
+      parameter_file["Q_att_z"] = int(row["Q_att_z_0"])
+      parameter_file["Q_vel"]   = int(row["Q_vel_0"])
+      parameter_file["Q_omega"] = int(row["Q_omega_0"])
   with open(parameters_path, "w") as f:
     yaml.dump(parameter_file, f)
   return loadParams(parameters_path)

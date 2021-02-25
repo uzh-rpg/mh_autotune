@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<launch>
+    <param name="resources_path"            value="$(find autotune)/resources/" />
+    <param name="mpc_parameters"            value="$(find agilib)/params/mpc.yaml" />
+
+    <node pkg="autotune" type="update_params.py" name="autotune_node" output="screen" />
+</launch>
