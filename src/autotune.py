@@ -57,12 +57,12 @@ class AutoTune():
         self.count_accepted += 1
         rospy.logwarn("AutoTune || Accepted configuration at iteration %d." % (it))
         rospy.logwarn("AutoTune || Acceptance rate: %2.2f %%." % (self.count_accepted*(1/it)*100))
-        if config_new["Cost"] <= self.config_best["Cost"]:
+        if config_new["error"] <= self.config_best["error"]:
           self.config_best = config_new
           rospy.logwarn("AutoTune || Updated best configuration.")
       else:
         rospy.logwarn("AutoTune || Rejected configuration at iteration %d." % (it))
-      rospy.logwarn("AutoTune || Best configuration || Error: %4.4f || Cost: %4.4f" % (self.config_best["Error"], self.config_best["Cost"]))
+      rospy.logwarn("AutoTune || Best configuration || Error: %4.4f || Cost: %4.4f" % (self.config_best["error"], self.config_best["score"]))
     saveParameters(self.resources_path, self.config_best, self.parameter_list, mode="a", header=False)
     rospy.logwarn("AutoTune || Finished Racing.")
 
@@ -70,11 +70,12 @@ class AutoTune():
     history = self.drone.run(self.parameter_list, 0)
 #    error = history["error"].apply(lambda x: np.exp(5*x)).sum()
 #    score = {"Error": error, "Cost": self.computeCost(error)}
-    error = history["error"].sum()
-    score = history["error"].sum()
-    rospy.logwarn("AutoTune || Error: %4.4f || Cost: %4.4f" % (score["Error"], score["Cost"]))
-    saveParameters(self.resources_path, score, self.parameter_list, mode="w", header=True)
-    return score
+    error = history["error"].mean()
+    score = np.exp(history["error"].mean())
+    rospy.logwarn("AutoTune || Error: %4.4f || Cost: %4.4f" % (error, score))
+    result = {"score":score, "error":error}
+    saveParameters(self.resources_path, result, self.parameter_list, mode="w", header=True)
+    return result
 
   def transitionModel(self, it):
     rospy.logwarn("AutoTune || Optimizing from segment %d." % (self.change_parameter))
@@ -93,11 +94,12 @@ class AutoTune():
     history = self.drone.run(self.parameter_list, it)
 #    error = history["error"].apply(lambda x: np.exp(5*x)).sum()
 #    score = {"Error": error, "Cost": self.computeCost(error)}
-    error = history["error"].sum()
-    score = history["error"].sum()
-    rospy.logwarn("AutoTune || Error: %4.4f || Cost: %4.4f" % (score["Error"], score["Cost"]))
-    saveParameters(self.resources_path, score, self.parameter_list, mode="a", header=False)
-    return score
+    error = history["error"].mean()
+    score = np.exp(history["error"].mean())
+    rospy.logwarn("AutoTune || Error: %4.4f || Cost: %4.4f" % (error, score))
+    result = {"score":score, "error":error}
+    saveParameters(self.resources_path, result, self.parameter_list, mode="a", header=False)
+    return result
 
   def boundedNormal(self, parameter_name, value, sigma):
     new_value = np.random.normal(value, sigma)
@@ -115,11 +117,11 @@ class AutoTune():
     return t**3
 
   def acceptance(self, config_new):
-    if config_new["Cost"] < self.config["Cost"]:
+    if config_new["error"] < self.config["error"]:
       return True
     else:
       accept = np.random.uniform(0, 1)
-      return (accept < (self.config["Cost"]/config_new["Cost"]))
+      return (accept < (self.config["score"]/config_new["score"]))
 
 def loadParams(parameters_path):
   parameter_list = []
