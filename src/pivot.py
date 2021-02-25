@@ -10,8 +10,11 @@ def getPivots(file_name, horizon_threshold=102, height_threshold=3, degree_thres
   folder_path = rospy.get_param("/resources_path") + "trajectories/"
   df = pd.read_csv(folder_path+file_name, dtype=float, header=0)
   delta_x = int(0.5 * horizon_length / df["t"][1]) + 1
-  bounds = getBounds(df["p_z"].to_numpy(), horizon_threshold, height_threshold, degree_threshold, delta_x)[1:]
-  return [b[0] for b in bounds]
+  return []
+#  bounds = [(64, 135, 'red'), (686, 742, 'blue')]   
+#  bounds = [(64, 135, 'red'), (135, 192, 'blue'), (192, 235, 'red'), (235, 343, 'blue'), (343, 411, 'red'), (411, 467, 'blue'), (467, 510, 'red'), (510, 618, 'blue'), (618, 686, 'red'), (686, 742, 'blue'), (742, 800, 'red')]
+#  bounds = getBounds(df["p_z"].to_numpy(), horizon_threshold, height_threshold, degree_threshold, delta_x)[1:]
+#  return [b[0] for b in bounds]
 
 def getBounds(positions, horizon_threshold, height_threshold, degree_threshold, delta_x):
   position_threshold = (max(positions) - min(positions))*0.01
@@ -52,6 +55,7 @@ def getBounds(positions, horizon_threshold, height_threshold, degree_threshold, 
       bounds.append((initial_index, len(positions)-1, "blue"))
   bounds.sort(key=lambda x:x[0])
   if len(bounds) == 1: return bounds
+
   for i, b in enumerate(bounds):
     if b[2] == "white":
       continue

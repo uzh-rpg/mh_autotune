@@ -1,6 +1,6 @@
 file_name:                          "paper_3_3_twr_rampup_splits.csv"
-max_iterations:                     1000
-sigma:                              5
+max_iterations:                     10
+sigma:                              0
 z_offset:                           0.0
 distance_threshold:                 6.0
 horizon_length:                     0.6

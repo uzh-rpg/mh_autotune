@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<launch>
+    <arg name="quad_name"                   default="hummingbird"/>
+    <param name="resources_path"            value="$(find autotune)/resources/" />
+    <param name="mpc_parameters"            value="$(find agilib)/params/mpc.yaml" />
+
+    <group ns="$(arg quad_name)">
+        <node name="agiros_pilot" pkg="agiros" type="agisim_node" output="screen">
+            <param name="param_dir"         value="$(find agilib)/params"/>
+            <param name="ros_param_dir"     value="$(find agiros)/parameters"/>
+            <param name="pilot_config"      value="simple_sim_pilot.yaml"/>
+        </node>
+    </group>
+
+    <!-- Visualization -->
+<!--    <node pkg="rviz" type="rviz" name="viz_face" args="-d $(find agiros)/resources/rviz/simulation.rviz" ns="$(arg quad_name)"/>-->
+
+    <!-- GUI -->
+<!--    <node name="agiros_gui" pkg="rqt_gui" type="rqt_gui" args="-s agiros_gui.basic_flight.BasicFlight args quad_name $(arg quad_name)" output="screen"/>-->
+
+    <!-- AutoTune -->
+    <node pkg="autotune" type="autotune.py" name="autotune_node" output="screen" >
+        <rosparam file="$(find autotune)/params/autotune.yaml" />
+    </node>
+</launch>

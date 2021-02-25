@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<launch>
+    <arg name="execution_idx"               default="0"/>
+    <arg name="iterations"                  default="10"/>
+    <arg name="trajectory_file"             default="paper_3_3_twr_rampup_splits.csv"/>
+    <arg name="quad_name"                   default="hummingbird"/>
+
+    <param name="execution_idx"             value="$(arg execution_idx)"/>
+    <param name="resources_path"            value="$(find autotune)/resources/" />
+    <param name="mpc_parameters"            value="$(find agilib)/params_$(arg execution_idx)/mpc.yaml" />
+
+    <group ns="$(arg quad_name)">
+        <node name="agiros_pilot" pkg="agiros" type="agisim_node" output="screen">
+            <param name="param_dir"         value="$(find agilib)/params_$(arg execution_idx)"/>
+            <param name="ros_param_dir"     value="$(find agiros)/parameters"/>
+            <param name="pilot_config"      value="simple_sim_pilot.yaml"/>
+        </node>
+    </group>
+
+    <node pkg="autotune" type="diagnostic.py" name="autotune_node_$(arg execution_idx)" output="screen" />
+</launch>

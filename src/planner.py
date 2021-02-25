@@ -4,21 +4,15 @@ import rospy
 import pandas as pd
 import numpy as np
 
-import utils
-
-from quadrotor_msgs.msg import Trajectory, TrajectoryPoint
+from agiros_msgs.msg import Reference, Setpoint, Command
 
 
-def parse(path, save_trajectory, z_offset):
-  df = pd.read_csv(path, dtype=float, header=0, usecols=[i for i in range(1, 19)])
-  trajectory = Trajectory()
+def parse(path, z_offset=0.0):
+  df = pd.read_csv(path, dtype=float, header=0) #, usecols=[i for i in range(1, 19)]
+  trajectory = Reference()
   trajectory.points = [parsePoint(p, z_offset) for _, p in df.iterrows()]
   trajectory.header.frame_id = "world"
-  trajectory.header.stamp = rospy.Time.now()
-  trajectory.type = 1
-  rospy.loginfo("Parser || Parsed Time-Optimal Trajectory || Size %d || Duration %2.4f" % (len(trajectory.points), df.iloc[-1]["t"]))
-  if save_trajectory:
-    utils.saveTrajectory(trajectory)
+  rospy.logwarn("Parser || Parsed Time-Optimal Trajectory || Size %d || Duration %2.4f" % (len(trajectory.points), df.iloc[-1]["t"]))
   return trajectory
 
 def parsePoint(p, z_offset):
@@ -26,24 +20,28 @@ def parsePoint(p, z_offset):
   mass = 1.0
   u_sum = p.loc["u_1"] + p.loc["u_2"] + p.loc["u_3"] + p.loc["u_4"]
   acc = rotateVectorByQuat(u_sum/mass, q)
-  point = TrajectoryPoint()
-  point.time_from_start = rospy.Duration(p.loc["t"])
-  point.pose.position.x = p.loc["p_x"]
-  point.pose.position.y = p.loc["p_y"]
-  point.pose.position.z = p.loc["p_z"]+z_offset
-  point.pose.orientation.w = q[0]
-  point.pose.orientation.x = q[1]
-  point.pose.orientation.y = q[2]
-  point.pose.orientation.z = q[3]
-  point.velocity.linear.x = p.loc["v_x"]
-  point.velocity.linear.y = p.loc["v_y"]
-  point.velocity.linear.z = p.loc["v_z"]
-  point.acceleration.linear.x = acc[0][0]
-  point.acceleration.linear.y = acc[1][0]
-  point.acceleration.linear.z = acc[2][0]-9.8066
-  point.heading = 0.0
-  point.heading_rate = 0.0
-  point.heading_acceleration = 0.0
+  point = Setpoint()
+  point.state.t = p.loc["t"]
+  point.state.pose.position.x = p.loc["p_x"]
+  point.state.pose.position.y = p.loc["p_y"]
+  point.state.pose.position.z = p.loc["p_z"]+z_offset
+  point.state.pose.orientation.w = q[0]
+  point.state.pose.orientation.x = q[1]
+  point.state.pose.orientation.y = q[2]
+  point.state.pose.orientation.z = q[3]
+  point.state.velocity.linear.x = p.loc["v_x"]
+  point.state.velocity.linear.y = p.loc["v_y"]
+  point.state.velocity.linear.z = p.loc["v_z"]
+  point.state.velocity.angular.x = p.loc["w_x"]
+  point.state.velocity.angular.y = p.loc["w_y"]
+  point.state.velocity.angular.z = p.loc["w_z"]
+  point.state.acceleration.linear.x = acc[0][0]
+  point.state.acceleration.linear.y = acc[1][0]
+  point.state.acceleration.linear.z = acc[2][0]-9.8066
+  point.command.collective_thrust = u_sum
+  point.command.bodyrates.x = p.loc["w_x"]
+  point.command.bodyrates.y = p.loc["w_y"]
+  point.command.bodyrates.z = p.loc["w_z"]
   return point
 
 def rotateVectorByQuat(vz, q):
