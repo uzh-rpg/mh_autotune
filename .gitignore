@@ -45,3 +45,8 @@ matlab_gen
 # CLion 
 .idea/
 cmake-build-debug/
+
+# statistics
+./resources/statistics/*
+#history
+resources/*.csv
