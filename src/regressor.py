@@ -14,7 +14,7 @@ import csv
 import warnings
 warnings.filterwarnings("ignore", category=RuntimeWarning)
 
-import minimum_time_trajectory_parser
+import planner
 import pivot
 
 
@@ -47,7 +47,7 @@ def train(level, resources_path, feature_list):
       for _, p in df.iterrows():
         q = np.array([p.loc["q_w"], p.loc["q_x"], p.loc["q_y"], p.loc["q_z"]])
         u_sum = p.loc["u_1"] + p.loc["u_2"] + p.loc["u_3"] + p.loc["u_4"]
-        acc = minimum_time_trajectory_parser.rotateVectorByQuat(u_sum, q)
+        acc = planner.rotateVectorByQuat(u_sum, q)
         accelerations["f_x"].append(acc[0][0])
         accelerations["f_y"].append(acc[1][0])
         accelerations["f_z"].append(acc[2][0]-9.8066)
@@ -116,7 +116,7 @@ def train(level, resources_path, feature_list):
   return models, scalers
 
 def infer(models, scalers, file_name, resources_path, feature_list):
-  L_pos_xy, L_pos_z, L_attitude, L_velocity, L_horizon = [], [], [], [], []
+  L_pos_xy, L_pos_z, L_attitude, L_velocity, L_horizon, L_omega = [], [], [], [], [], []
   df = pd.read_csv(resources_path + "trajectories/" + file_name + ".csv", dtype=float, header=0)
   horizon_points = int(0.5 * horizon_length / df["t"][1]) + 1
   positions = df["p_z"].to_numpy()
@@ -127,7 +127,7 @@ def infer(models, scalers, file_name, resources_path, feature_list):
   for _, p in df.iterrows():
     q = np.array([p.loc["q_w"], p.loc["q_x"], p.loc["q_y"], p.loc["q_z"]])
     u_sum = p.loc["u_1"] + p.loc["u_2"] + p.loc["u_3"] + p.loc["u_4"]
-    acc = minimum_time_trajectory_parser.rotateVectorByQuat(u_sum, q)
+    acc = planner.rotateVectorByQuat(u_sum, q)
     accelerations["f_x"].append(acc[0][0])
     accelerations["f_y"].append(acc[1][0])
     accelerations["f_z"].append(acc[2][0]-9.8066)
@@ -178,16 +178,25 @@ def infer(models, scalers, file_name, resources_path, feature_list):
     X = np.array([X])
     X = scalers[b[2]].transform(X)
     prediction = list(models[b[2]].predict(X)[0])
-    L_pos_xy.append(float(prediction[0]))
-    L_pos_z.append(float(prediction[1]))
-    L_attitude.append(float(prediction[2]))
-    L_velocity.append(float(prediction[3]))
-    L_horizon.append(float(prediction[4]))
-  return L_pos_xy, L_pos_z, L_attitude, L_velocity, L_horizon
+    L_pos_xy.append(round(float(prediction[0]), 3))
+    L_pos_z.append(round(float(prediction[1]), 3))
+    L_attitude.append(round(float(prediction[2]), 3))
+    L_velocity.append(round(float(prediction[3]), 3))
+    L_horizon.append(round(float(prediction[4]), 3))
+    L_omega.append(30.0)
+  return L_pos_xy, L_pos_z, L_attitude, L_velocity, L_omega, L_horizon
 
 def predict(level, resources_path):
-  feature_list = ["delta_y","delta_x","delta_v","delta_a","mean_slope"]
-  models, scalers = train(level, resources_path, feature_list)
-  L_pos_xy, L_pos_z, L_attitude, L_velocity, L_horizon = infer(models, scalers, level, resources_path, feature_list)
-  return np.array([L_pos_xy, L_pos_z, L_attitude, L_velocity, L_horizon])
+#  feature_list = ["delta_y","delta_x","delta_v","delta_a","mean_slope"]
+#  models, scalers = train(level, resources_path, feature_list)
+#  L_pos_xy, L_pos_z, L_attitude, L_velocity, L_omega, L_horizon = infer(models, scalers, level, resources_path, feature_list)
+
+  L_pos_xy   =  [  500.0  ]
+  L_pos_z    =  [  700.0  ]
+  L_attitude =  [   10.0  ]
+  L_velocity =  [    5.0  ]
+  L_omega  =    [  30.00  ]
+  L_horizon  =  [   6.00  ]
+
+  return np.array([L_pos_xy, L_pos_z, L_attitude, L_velocity, L_omega, L_horizon])
 

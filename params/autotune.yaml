@@ -1,10 +1,18 @@
-# Available trajectory files: circle, drop, flip, spiral
-file_name: "circle.csv"
-max_iterations: 300
-sigma: 5
-z_offset: 4
-distance_threshold: 6.0
-horizon_length: 0.6
-slow_velocity: 1.0
-early_stop: 0
-save_trajectory: false
+file_name:                          "paper_3_3_twr_rampup_splits.csv"
+max_iterations:                     1000
+sigma:                              5
+z_offset:                           0.0
+distance_threshold:                 6.0
+horizon_length:                     0.6
+slow_velocity:                      0.1
+early_stop:                         0
+save_trajectory:                    false
+B_pos_x:                            [   1.0,  1500.0  ]
+B_pos_y:                            [   1.0,  1500.0  ]
+B_pos_z:                            [   1.0,  1500.0  ]
+B_att_x:                            [   1.0,  1500.0  ]
+B_att_y:                            [   1.0,  1500.0  ]
+B_att_z:                            [   1.0,  1500.0  ]
+B_vel:                              [   1.0,  1000.0  ]
+B_omega:                            [   1.0,  1000.0  ]
+B_horizon:                          [   1.0,     7.0  ]
