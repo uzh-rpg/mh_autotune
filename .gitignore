@@ -1,5 +1,6 @@
 # python 
 *.pyc
+resources/statistics/
 
 # Compiled Object files
 *.slo

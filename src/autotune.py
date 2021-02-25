@@ -50,7 +50,7 @@ class AutoTune():
 
   def run(self):
     for it in range(1, self.max_iterations):
-      config_new = self.transitionModel()
+      config_new = self.transitionModel(it)
       if self.acceptance(config_new):
         config_new["Accepted"] = 1
         self.config = config_new
@@ -67,14 +67,14 @@ class AutoTune():
     rospy.logwarn("AutoTune || Finished Racing.")
 
   def initConfiguration(self):
-    history = self.drone.run(self.parameter_list)
+    history = self.drone.run(self.parameter_list, 0)
     error = history["error"].apply(lambda x: np.exp(5*x)).sum()
     score = {"Error": error, "Cost": self.computeCost(error)}
     rospy.logwarn("AutoTune || Error: %4.4f || Cost: %4.4f" % (score["Error"], score["Cost"]))
     saveParameters(self.resources_path, score, self.parameter_list, mode="w", header=True)
     return score
 
-  def transitionModel(self):
+  def transitionModel(self, it):
     rospy.logwarn("AutoTune || Optimizing from segment %d." % (self.change_parameter))
     new_parameter_list = np.copy(self.parameter_list)
     rows = len(self.parameter_list)-1
@@ -88,7 +88,7 @@ class AutoTune():
     logParameterList(self.parameter_list, new_parameter_list)
     self.parameter_list = np.copy(new_parameter_list)
     self.drone.reset()
-    history = self.drone.run(self.parameter_list)
+    history = self.drone.run(self.parameter_list, it)
     error = history["error"].apply(lambda x: np.exp(5*x)).sum()
     score = {"Error": error, "Cost": self.computeCost(error)}
     rospy.logwarn("AutoTune || Error: %4.4f || Cost: %4.4f" % (score["Error"], score["Cost"]))
