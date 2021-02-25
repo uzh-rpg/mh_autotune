@@ -45,6 +45,7 @@ class AutoTune():
 
   def run(self):
     parameter_list = findBestParams(self.resources_path, self.parameters_path) if self.use_history else loadParams(self.parameters_path)
+    logParameterList(parameter_list)
     histories, wp_errors, mean_errors, max_errors, sum_errors = [], [], [], [], []
     for it in range(self.iterations):
       history = self.drone.run(parameter_list, it)
@@ -219,7 +220,7 @@ def rotanimate(ax, angles, output, **kwargs):
 def computeCost(history_error):
   return (history_error.apply(lambda x: np.exp(5*x)).sum())**3
 
-def logParameterList(q, q_new):
+def logParameterList(q):
   l = range(len(q[0]))
   chunks = [list(l[i:i+8]) for i in range(0, len(l), 8)]
   for c in chunks:
@@ -231,20 +232,18 @@ def logParameterList(q, q_new):
     q_att_z    = "Q_att_z      "
     q_vel      = "Q_vel        "
     q_omega    = "Q_omega      "
-#    q_horizon  = "Q_horizon    "
     s = ""
     for j in c:
       s += "                         " + str(j)
-      q_pos_x    += "%8.2f  -->  %8.2f   " % (q[0][j], q_new[0][j])
-      q_pos_y    += "%8.2f  -->  %8.2f   " % (q[1][j], q_new[1][j])
-      q_pos_z    += "%8.2f  -->  %8.2f   " % (q[2][j], q_new[2][j])
-      q_att_x    += "%8.2f  -->  %8.2f   " % (q[3][j], q_new[3][j])
-      q_att_y    += "%8.2f  -->  %8.2f   " % (q[4][j], q_new[4][j])
-      q_att_z    += "%8.2f  -->  %8.2f   " % (q[5][j], q_new[5][j])
-      q_vel      += "%8.2f  -->  %8.2f   " % (q[6][j], q_new[6][j])
-      q_omega    += "%8.2f  -->  %8.2f   " % (q[7][j], q_new[7][j])
-#      q_horizon  += "%8.2f  -->  %8.2f   " % (q[8][j], q_new[8][j])
-    rospy.logwarn(s)
+      q_pos_x    += "%8.2f     " % (q[0][j])
+      q_pos_y    += "%8.2f     " % (q[1][j])
+      q_pos_z    += "%8.2f     " % (q[2][j])
+      q_att_x    += "%8.2f     " % (q[3][j])
+      q_att_y    += "%8.2f     " % (q[4][j])
+      q_att_z    += "%8.2f     " % (q[5][j])
+      q_vel      += "%8.2f     " % (q[6][j])
+      q_omega    += "%8.2f     " % (q[7][j])
+
     rospy.logwarn(q_pos_x)
     rospy.logwarn(q_pos_y)
     rospy.logwarn(q_pos_z)
@@ -253,7 +252,6 @@ def logParameterList(q, q_new):
     rospy.logwarn(q_att_z)
     rospy.logwarn(q_vel)
     rospy.logwarn(q_omega)
-#    rospy.logwarn(q_horizon)
     rospy.logwarn("\n")
 
 def saveParameters(resources_path, score, parameters, mode="a", header=False):
