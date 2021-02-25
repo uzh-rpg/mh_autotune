@@ -68,8 +68,10 @@ class AutoTune():
 
   def initConfiguration(self):
     history = self.drone.run(self.parameter_list, 0)
-    error = history["error"].apply(lambda x: np.exp(5*x)).sum()
-    score = {"Error": error, "Cost": self.computeCost(error)}
+#    error = history["error"].apply(lambda x: np.exp(5*x)).sum()
+#    score = {"Error": error, "Cost": self.computeCost(error)}
+    error = history["error"].sum()
+    score = history["error"].sum()
     rospy.logwarn("AutoTune || Error: %4.4f || Cost: %4.4f" % (score["Error"], score["Cost"]))
     saveParameters(self.resources_path, score, self.parameter_list, mode="w", header=True)
     return score
@@ -89,8 +91,10 @@ class AutoTune():
     self.parameter_list = np.copy(new_parameter_list)
     self.drone.reset()
     history = self.drone.run(self.parameter_list, it)
-    error = history["error"].apply(lambda x: np.exp(5*x)).sum()
-    score = {"Error": error, "Cost": self.computeCost(error)}
+#    error = history["error"].apply(lambda x: np.exp(5*x)).sum()
+#    score = {"Error": error, "Cost": self.computeCost(error)}
+    error = history["error"].sum()
+    score = history["error"].sum()
     rospy.logwarn("AutoTune || Error: %4.4f || Cost: %4.4f" % (score["Error"], score["Cost"]))
     saveParameters(self.resources_path, score, self.parameter_list, mode="a", header=False)
     return score
