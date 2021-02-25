@@ -1,6 +1,5 @@
 # python 
 *.pyc
-resources/statistics/
 
 # Compiled Object files
 *.slo
@@ -38,11 +37,14 @@ msg_gen
 log
 *.log
 
-ROS_NOBUILD
-
 # Matlab msgs gen
 matlab_gen
 
 # CLion 
 .idea/
 cmake-build-debug/
+
+# statistics
+./resources/statistics/*
+#history
+resources/*.csv
