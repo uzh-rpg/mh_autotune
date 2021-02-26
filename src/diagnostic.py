@@ -82,7 +82,7 @@ class AutoTune():
 
 def findBestParams(resources_path, parameters_path):
   df = pd.read_csv(resources_path + "history.csv", dtype=float, header=0)
-  row = df.iloc[df["Error"].idxmin()]
+  row = df.iloc[df["error"].idxmin()]
   with open(parameters_path) as f:
       parameter_file = yaml.load(f)
       parameter_file["Q_pos_x"] = int(row["Q_pos_x_0"])
