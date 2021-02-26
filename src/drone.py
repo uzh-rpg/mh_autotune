@@ -27,11 +27,10 @@ class Quadrotor():
     self.parameters_path = parameters_path
     self.horizon_length = rospy.get_param("/autotune_node/horizon_length")
     self.distance_threshold = rospy.get_param("/autotune_node/distance_threshold")
-    self.horizon_length = rospy.get_param("/autotune_node/horizon_length")
     self.trajectory_time = rospy.get_time()
     self.trajectory_folder = time.strftime("%Y%m%d-%H%M%S")
     self.trajectory = self.parseTrajectory()
-    self.history = pd.DataFrame(columns=["error", "t"])
+    self.history = pd.DataFrame(columns=["error", "t", "p_x", "p_y", "p_z"])
     self.pivot_index = 0
     self.history_cnt = 0
     self.odometry_t = 0
@@ -49,7 +48,7 @@ class Quadrotor():
     self.off_publisher = rospy.Publisher("/hummingbird/agiros_pilot/off", Empty, queue_size=1)
     self.move_to_start_publisher = rospy.Publisher("/hummingbird/agiros_pilot/go_to_pose", PoseStamped, queue_size=1)
 
-  def run(self, parameter_list):
+  def run(self, parameter_list, it):
     rospy.logwarn("Drone || Run.")
     self.parameter_list = parameter_list
     self.setParameters()
@@ -63,7 +62,7 @@ class Quadrotor():
       rospy.rostime.wallsleep(0.1)
     self.is_racing = False
     self.history = self.history[:-15]
-    saveStatistics(self.history, self.resources_path+"statistics/", self.file_name, self.trajectory_folder)
+    saveStatistics(self.history, self.resources_path+"statistics/", self.file_name, self.trajectory_folder, it)
     rospy.logwarn("Drone || Finished racing!")
     return self.history.copy()
 
@@ -141,7 +140,7 @@ class Quadrotor():
     self.is_hovering = False
     self.pivot_index = 0
     self.history_cnt = 0
-    self.history = pd.DataFrame(columns=["error", "t"])
+    self.history = pd.DataFrame(columns=["error", "t", "p_x", "p_y", "p_z"])
     rospy.logwarn("Drone || Reset simulation successfully.")
 
   def parseTrajectory(self):
@@ -172,7 +171,7 @@ class Quadrotor():
     self.is_hovering = True if state_msg.reference_left_duration == float("inf") else False
     if self.is_racing:
       error = np.linalg.norm(self.reference - self.odometry, ord=1)
-      self.history.loc[self.history_cnt] = [error, self.odometry_t]
+      self.history.loc[self.history_cnt] = [error, self.odometry_t, self.odometry[0], self.odometry[1], self.odometry[2]]
       self.history_cnt += 1
 #      rospy.logwarn_throttle(0.25, "Drone || Tracking error || %3.3f" % error)
 
@@ -199,14 +198,14 @@ def wait_connection(publisher, rate):
     rospy.logwarn_throttle(1.0, "Drone || Waiting for a listener.")
     rate.sleep()
 
-def saveStatistics(statistics, path, file_name, trajectory_folder):
+def saveStatistics(statistics, path, file_name, trajectory_folder, it):
   folder_path = path + file_name[:-4] + "/"
   if not os.path.exists(folder_path):
     os.makedirs(folder_path)
   folder_path += trajectory_folder + "/"
   if not os.path.exists(folder_path):
     os.makedirs(folder_path)
-  statistics.to_csv(folder_path + time.strftime("%Y%m%d-%H%M%S") + ".csv", index=False)
+  statistics.to_csv(folder_path + "iteration_" + str(it) + ".csv", index=False)
   rospy.logwarn("Drone || Saved statistics.")
 
 def toRosPath(trajectory, idx):
