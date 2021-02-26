@@ -84,9 +84,15 @@ class AutoTune():
     cols = len(self.parameter_list[0])
     for i in range(rows):
       for j in range(cols):
-        new_parameter_list[i][j] = round(self.boundedNormal(str(i), new_parameter_list[i][j], self.sigma), 3)
+        if i < 3:
+            new_parameter_list[i][j] = round(self.boundedNormal(str(i), new_parameter_list[i][j], self.sigma*2.5), 3)
+        else:
+            new_parameter_list[i][j] = round(self.boundedNormal(str(i), new_parameter_list[i][j], self.sigma), 3)
     for j in range(cols):
-      new_parameter_list[rows][j] = round(self.boundedNormal(str(rows), new_parameter_list[rows][j], self.sigma*0.10), 3)
+        if i < 3:
+            new_parameter_list[rows][j] = round(self.boundedNormal(str(rows), new_parameter_list[rows][j], self.sigma*2.5), 3)
+        else:
+            new_parameter_list[rows][j] = round(self.boundedNormal(str(rows), new_parameter_list[rows][j], self.sigma), 3)
     rospy.logwarn("AutoTune || Updating Parameters List:")
     logParameterList(self.parameter_list, new_parameter_list)
     self.parameter_list = np.copy(new_parameter_list)
