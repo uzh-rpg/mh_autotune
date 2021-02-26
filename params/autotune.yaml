@@ -1,4 +1,4 @@
-file_name:                          "paper_3_3_twr_rampup_splits.csv"
+file_name:                          "2021-02-18-17-26-00_traj.csv"
 max_iterations:                     1000
 sigma:                              5
 z_offset:                           0.0
@@ -6,12 +6,12 @@ distance_threshold:                 6.0
 horizon_length:                     0.6
 slow_velocity:                      0.1
 early_stop:                         0
-B_pos_x:                            [   1.0,  1500.0  ]
-B_pos_y:                            [   1.0,  1500.0  ]
-B_pos_z:                            [   1.0,  1500.0  ]
-B_att_x:                            [   1.0,  1500.0  ]
-B_att_y:                            [   1.0,  1500.0  ]
-B_att_z:                            [   1.0,  1500.0  ]
-B_vel:                              [   1.0,  1000.0  ]
-B_omega:                            [   1.0,  1000.0  ]
+B_pos_x:                            [   1.0,  700.0  ]
+B_pos_y:                            [   1.0,  700.0  ]
+B_pos_z:                            [   1.0,  1000.0  ]
+B_att_x:                            [   1.0,  30.0  ]
+B_att_y:                            [   1.0,  30.0  ]
+B_att_z:                            [   10.0,  500.0  ]
+B_vel:                              [   5.0,  100.0  ]
+B_omega:                            [   20.0,  100.0  ]
 B_horizon:                          [   1.0,     7.0  ]

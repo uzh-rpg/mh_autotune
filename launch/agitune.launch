@@ -13,7 +13,7 @@
     </group>
 
     <!-- Visualization -->
-<!--    <node pkg="rviz" type="rviz" name="viz_face" args="-d $(find agiros)/resources/rviz/simulation.rviz" ns="$(arg quad_name)"/>-->
+   <node pkg="rviz" type="rviz" name="viz_face" args="-d $(find agiros)/resources/rviz/simulation.rviz" ns="$(arg quad_name)"/>
 
     <!-- GUI -->
 <!--    <node name="agiros_gui" pkg="rqt_gui" type="rqt_gui" args="-s agiros_gui.basic_flight.BasicFlight args quad_name $(arg quad_name)" output="screen"/>-->
