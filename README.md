@@ -4,7 +4,7 @@ This repo contains the code associated to our paper AutoTune: Controller Tuning 
 
 Check out our YouTube-Video!
 
-[![Watch the video](https://i.imgur.com/vKb2F1B.png)](https://youtu.be/vt5fpE0bzSY)
+[![Watch the video](https://i.imgur.com/vKb2F1B.png)](https://www.youtube.com/watch?v=eVjBQfaBETU&ab_channel=AntonioLoquercio)
 
 ## Publication
 
@@ -16,6 +16,24 @@ If you use this code in an academic context, please cite the following paper:
   booktitle = {ArXiV},
   year = {2021}
 }
+```
+
+## License
+
+Copyright (C) 2021
+```
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ```
 
 ## Installation
@@ -79,21 +97,3 @@ To use AutoTune to tune the model predictive controller and fly your own traject
 - Add your own trajectory to ```~/autotune_ws/src/mh_autotune/resources/trajectories```
 
 - Change the ```file_name``` parameter in ```~/autotune_ws/src/mh_autotune/params/autotune.yaml``` to match your trajectory file name
-
-## License
-
-Copyright (C) 2021
-```
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
-```
