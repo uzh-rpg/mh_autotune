@@ -4,7 +4,9 @@ This repo contains the code associated to our paper "AutoTune: Controller Tuning
 
 [**Check out our YouTube-Video!**](https://www.youtube.com/watch?v=eVjBQfaBETU&ab_channel=AntonioLoquercio)
 
-[<img src="./youtube-video.gif" title="AutoTune Youtube-Video" width="75%">](https://www.youtube.com/watch?v=eVjBQfaBETU&ab_channel=AntonioLoquercio)
+<p align="center">
+  [<img src="./youtube-video.gif" title="AutoTune Youtube-Video" width="65%">](https://www.youtube.com/watch?v=eVjBQfaBETU&ab_channel=AntonioLoquercio)
+</p>
 
 ## Publication
 
