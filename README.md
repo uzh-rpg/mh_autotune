@@ -1,6 +1,6 @@
 # AutoTune
 
-This repo contains the code associated to our paper AutoTune: Controller Tuning for High-Speed Flight.
+This repo contains the code associated to our paper "AutoTune: Controller Tuning for High-Speed Flight".
 
 [**Check out our YouTube-Video!**](https://www.youtube.com/watch?v=eVjBQfaBETU&ab_channel=AntonioLoquercio)
 
