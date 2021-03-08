@@ -1,6 +1,6 @@
 # AutoTune
 
-This repo contains the code associated to our paper AutoTune: Metropolis-Hastings Sampling for Automatic Controller Tuning.
+This repo contains the code associated to our paper AutoTune: Controller Tuning for High-Speed Flight.
 
 ## Installation
 
