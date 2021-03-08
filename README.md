@@ -2,9 +2,8 @@
 
 This repo contains the code associated to our paper AutoTune: Controller Tuning for High-Speed Flight.
 
-Check out our YouTube-Video!
-
-[![Watch the video] <img src="https://img.youtube.com/vi/eVjBQfaBETU/maxresdefault.jpg" width="50%">](https://www.youtube.com/watch?v=eVjBQfaBETU&ab_channel=AntonioLoquercio)
+(Check out our YouTube-Video!)[https://www.youtube.com/watch?v=eVjBQfaBETU&ab_channel=AntonioLoquercio]
+[<img src="https://img.youtube.com/vi/eVjBQfaBETU/maxresdefault.jpg" width="50%">](https://www.youtube.com/watch?v=eVjBQfaBETU&ab_channel=AntonioLoquercio)
 
 ## Publication
 
