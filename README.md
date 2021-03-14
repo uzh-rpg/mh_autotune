@@ -2,13 +2,7 @@
 
 This repo contains the code associated to our paper "AutoTune: Controller Tuning for High-Speed Flight".
 
-[**Check out our YouTube-Video!**](https://www.youtube.com/watch?v=eVjBQfaBETU&ab_channel=AntonioLoquercio)
-
-[<img src="./youtube-video.gif" title="AutoTune Youtube-Video" width="65%">](https://www.youtube.com/watch?v=eVjBQfaBETU&ab_channel=AntonioLoquercio)
-
-## Publication
-
-If you use this code in an academic context, please cite the following paper:
+If you use AutoTune in an academic context, please cite the following publication:
 ```
 @ARTICLE{Autotune2021
   author = {Loquercio, Antonio and Saviolo, Alessandro and Scaramuzza, Davide},
@@ -17,6 +11,14 @@ If you use this code in an academic context, please cite the following paper:
   year = {2021}
 }
 ```
+
+[**Checkout our YouTube-Video!**](https://www.youtube.com/watch?v=eVjBQfaBETU&ab_channel=AntonioLoquercio)
+
+[<img src="./youtube-video.gif" title="AutoTune Youtube-Video" width="65%">](https://www.youtube.com/watch?v=eVjBQfaBETU&ab_channel=AntonioLoquercio)
+
+### Abstract
+
+Due to noisy actuation and external disturbances, tuning controllers for high-speed flight is very challenging. In this paper, we ask the following questions:  How sensitive are controllers to tuning when tracking high-speed maneuvers? What algorithms can we use to automatically tune them? To answer the first question, we study the relationship between parameters and performance and find out that the faster the maneuver, the more sensitive a controller becomes to its parameters. To answer the second question, we review existing methods for controller tuning and discover that prior works often perform poorly on the task of high-speed flight. Therefore, we propose AutoTune, a sampling-based tuning algorithm specifically tailored to high-speed flight. In contrast to previous work, our algorithm does not assume any prior knowledge of the drone or its optimization function and can deal with the multi-modal characteristics of the parameters' optimization space. We thoroughly evaluate AutoTune both in simulation and in the physical world. In our experiments, we outperform existing tuning algorithms by up to 90% in trajectory completion. The resulting controllers are tested in the AirSim Game of Drones competition, where we outperform the winner by up to 25% in lap-time. Finally, we show that AutoTune improves tracking error when flying a physical platform with respect to parameters tuned by a human expert.
 
 ## Installation
 
