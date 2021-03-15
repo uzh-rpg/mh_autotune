@@ -12,7 +12,9 @@ If you use AutoTune in an academic context, please cite the following publicatio
 }
 ```
 
-[**Checkout our YouTube-Video!**](https://www.youtube.com/watch?v=eVjBQfaBETU&ab_channel=AntonioLoquercio)
+[**Paper**](http://rpg.ifi.uzh.ch/docs/IROS21_Loquercio.pdf)
+
+[**YouTube-Video**](https://www.youtube.com/watch?v=eVjBQfaBETU&ab_channel=AntonioLoquercio)
 
 [<img src="./youtube-video.gif" title="AutoTune Youtube-Video" width="65%">](https://www.youtube.com/watch?v=eVjBQfaBETU&ab_channel=AntonioLoquercio)
 
