@@ -4,7 +4,7 @@ This repo contains the code associated to our paper "AutoTune: Controller Tuning
 
 If you use AutoTune in an academic context, please cite the following publication:
 ```
-@ARTICLE{Autotune2021
+@ARTICLE{Autotune2021,
   author = {Loquercio, Antonio and Saviolo, Alessandro and Scaramuzza, Davide},
   title = {AutoTune: Controller Tuning for High-Speed Flight},
   journal = {arXiv},
