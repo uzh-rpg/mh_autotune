@@ -7,12 +7,12 @@ If you use AutoTune in an academic context, please cite the following publicatio
 @ARTICLE{Autotune2021,
   author = {Loquercio, Antonio and Saviolo, Alessandro and Scaramuzza, Davide},
   title = {AutoTune: Controller Tuning for High-Speed Flight},
-  journal = {arXiv},
+  journal = {arXiv:2103.10698},
   year = {2021}
 }
 ```
 
-[**Paper**](http://rpg.ifi.uzh.ch/docs/IROS21_Loquercio.pdf)
+[**Paper**](https://arxiv.org/abs/2103.10698)
 
 [**YouTube-Video**](https://youtu.be/m2q_y7C01So)
 
