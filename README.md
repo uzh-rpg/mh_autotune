@@ -46,7 +46,7 @@ git clone https://github.com/uzh-rpg/mh_autotune.git
 ```
 vcs-import < mh_autotune/dependencies.yaml
 ```
-4. Download the Flightmare Unity Binary RPG_Flightmare.tar.xz for rendering from the [Releases](https://github.com/uzh-rpg/flightmare/releases) and extract it into ```~/autotune_ws/src/mh_autotune/flightmare/flightrender```.
+4. Download the Flightmare Unity Binary RPG_Flightmare.tar.xz for rendering from the [Releases](https://github.com/uzh-rpg/flightmare/releases) and extract it into ```~/autotune_ws/src/flightmare/flightrender```.
 
 5. Build:
 ```
