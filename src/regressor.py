@@ -29,7 +29,7 @@ import csv
 import warnings
 warnings.filterwarnings("ignore", category=RuntimeWarning)
 
-import minimum_time_trajectory_parser
+import planner
 import pivot
 
 
