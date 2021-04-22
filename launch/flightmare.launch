@@ -77,7 +77,7 @@
     </node>
 
     <!-- RPG Flightmare Unity Render. -->
-    <node pkg="flightrender" type="flightmare.x86_64" name="rpg_flightmare_render" unless="$(arg use_unity_editor)">
+    <node pkg="flightrender" type="RPG_Flightmare.x86_64" name="rpg_flightmare_render" unless="$(arg use_unity_editor)">
     </node>
 
     <!-- Autopilot -->
