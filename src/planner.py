@@ -19,8 +19,6 @@ import rospy
 import pandas as pd
 import numpy as np
 
-import utils
-
 from quadrotor_msgs.msg import Trajectory, TrajectoryPoint
 
 
@@ -32,8 +30,6 @@ def parse(path, save_trajectory, z_offset):
   trajectory.header.stamp = rospy.Time.now()
   trajectory.type = 1
   rospy.loginfo("Parser || Parsed Time-Optimal Trajectory || Size %d || Duration %2.4f" % (len(trajectory.points), df.iloc[-1]["t"]))
-  if save_trajectory:
-    utils.saveTrajectory(trajectory)
   return trajectory
 
 def parsePoint(p, z_offset):
