@@ -56,6 +56,12 @@ vcs-import < mh_autotune/dependencies.yaml
 ```
 catkin build
 ```
+
+***Note 3, you could get build errors such as : "set GLOG_INCLUDE_DIR to directory containing glog/logging.h" for example from building [rotors_simulator](https://github.com/ethz-asl/rotors_simulator) module, which is used inside this project. These errors occur because ros package dependencies for each modules are not installed yet. To do this, visit [here](http://wiki.ros.org/rosdep), or just simply type `rosdep install --from-paths src --ignore-src -r -y` command at the `~/autotune_ws` directory***
+
+***Note 4, you could get build errors like "Could not find a package configuration file provided by "gazebo_plugins"". This can occur for example if you only have installed 'ros-YOUR_DISTRO_NAME-desktop' through apt package manager, and not 'ros-YOUR_DISTRO_NAME-desktop-full' (which includes the gazebo interface & gazebo itself!). So you could try `sudo apt install ros-YOUR_DISTRO_NAME-desktop-full` to avoid this issue***                                       
+                                          
+                                          
 6. Add sourcing of your catkin workspace and AUTOTUNE_PATH environment variable to your ```.bashrc``` file:
 ```
 echo "source ~/autotune_ws/devel/setup.bash" >> ~/.bashrc
