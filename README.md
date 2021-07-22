@@ -46,6 +46,10 @@ git clone https://github.com/uzh-rpg/mh_autotune.git
 ```
 vcs-import < mh_autotune/dependencies.yaml
 ```
+***Note 1, if you get error like 'vcs-import: command not found', you need to install the vcstool. For help, visit [here](http://wiki.ros.org/vcstool)***
+
+***Note 2, if you get error like 'Could not determine ref type of version: git@github.com: Permission denied (publickey)', visit [this page](https://docs.github.com/en/github/authenticating-to-github/troubleshooting-ssh/error-permission-denied-publickey) to resolve the issue. You could [add a SSH key](https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account) and connect it to your Github account for example to solve this error***                                         
+                                          
 4. Download the Flightmare Unity Binary RPG_Flightmare.tar.xz for rendering from the [Releases](https://github.com/uzh-rpg/flightmare/releases) and extract it into ```~/autotune_ws/src/flightmare/flightrender```.
 
 5. Build:
