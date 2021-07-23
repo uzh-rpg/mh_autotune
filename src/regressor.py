@@ -62,7 +62,7 @@ def train(level, resources_path, feature_list):
       for _, p in df.iterrows():
         q = np.array([p.loc["q_w"], p.loc["q_x"], p.loc["q_y"], p.loc["q_z"]])
         u_sum = p.loc["u_1"] + p.loc["u_2"] + p.loc["u_3"] + p.loc["u_4"]
-        acc = minimum_time_trajectory_parser.rotateVectorByQuat(u_sum, q)
+        acc = planner.rotateVectorByQuat(u_sum, q)
         accelerations["f_x"].append(acc[0][0])
         accelerations["f_y"].append(acc[1][0])
         accelerations["f_z"].append(acc[2][0]-9.8066)
@@ -142,7 +142,7 @@ def infer(models, scalers, file_name, resources_path, feature_list):
   for _, p in df.iterrows():
     q = np.array([p.loc["q_w"], p.loc["q_x"], p.loc["q_y"], p.loc["q_z"]])
     u_sum = p.loc["u_1"] + p.loc["u_2"] + p.loc["u_3"] + p.loc["u_4"]
-    acc = minimum_time_trajectory_parser.rotateVectorByQuat(u_sum, q)
+    acc = planner.rotateVectorByQuat(u_sum, q)
     accelerations["f_x"].append(acc[0][0])
     accelerations["f_y"].append(acc[1][0])
     accelerations["f_z"].append(acc[2][0]-9.8066)
