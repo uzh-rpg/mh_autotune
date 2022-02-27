@@ -4,11 +4,15 @@ This repo contains the code associated to our paper "AutoTune: Controller Tuning
 
 If you use AutoTune in an academic context, please cite the following publication:
 ```
-@ARTICLE{Autotune2021,
-  author = {Loquercio, Antonio and Saviolo, Alessandro and Scaramuzza, Davide},
-  title = {AutoTune: Controller Tuning for High-Speed Flight},
-  journal = {arXiv:2103.10698},
-  year = {2021}
+@ARTICLE{Autotune2022,
+  author  = {Loquercio, Antonio and Saviolo, Alessandro and Scaramuzza, Davide},
+  title   = {AutoTune: Controller Tuning for High-Speed Flight},
+  journal = {IEEE Robotics and Automation Letters}, 
+  year    = {2022},
+  volume  = {7},
+  number  = {2},
+  pages   = {4432-4439},
+  doi     = {10.1109/LRA.2022.3146897}
 }
 ```
 
