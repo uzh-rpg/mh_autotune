@@ -16,7 +16,7 @@ If you use AutoTune in an academic context, please cite the following publicatio
 }
 ```
 
-[**Paper**](https://ieeexplore.ieee.org/document/9696365?source=authoralert)
+[**Paper**](https://rpg.ifi.uzh.ch/docs/RAL21_Saviolo_Loquercio_AutoTune.pdf)
 
 [**YouTube-Video**](https://youtu.be/m2q_y7C01So)
 
